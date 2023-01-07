@@ -1,19 +1,15 @@
-[submodule "naming-server"]
-    path = services/naming-server
-    url = https://github.com/two-monkeys-org/naming-server
+[submodule "services/naming-server"]
+	path = services/naming-server
+	url = https://github.com/two-monkeys-org/naming-server
 
-[submodule "main-service"]
-    path = services/main-service
-    url = https://github.com/two-monkeys-org/main-service
+[submodule "services/gateway"]
+	path = services/gateway
+	url = https://github.com/two-monkeys-org/gateway
 
-[submodule "user-service"]
-    path = services/user-service
-    url = https://github.com/two-monkeys-org/user-service
+[submodule "services/main-service"]
+	path = services/main-service
+	url = https://github.com/two-monkeys-org/main-service
 
-[submodule "naming-server"]
-    path = services/naming-server
-    url = https://bitbucket.org/jaredw/awesomelibrary
-
-[submodule "gateway"]
-    path = services/gateway
-    url = https://github.com/two-monkeys-org/gateway
+[submodule "services/user-service"]
+	path = services/user-service
+	url = https://github.com/two-monkeys-org/naming-server
