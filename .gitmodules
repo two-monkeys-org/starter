@@ -1,0 +1,19 @@
+[submodule "naming-server"]
+    path = naming-server
+    url = https://github.com/two-monkeys-org/naming-server
+
+[submodule "main-service"]
+    path = main-service
+    url = https://github.com/two-monkeys-org/main-service
+
+[submodule "user-service"]
+    path = user-service
+    url = https://github.com/two-monkeys-org/user-service
+
+[submodule "naming-server"]
+    path = naming-server
+    url = https://bitbucket.org/jaredw/awesomelibrary
+
+[submodule "gateway"]
+    path = gateway
+    url = https://github.com/two-monkeys-org/gateway
