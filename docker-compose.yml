@@ -1,0 +1,86 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:stable-alpine
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '433:433'
+      - '8080:8080'
+      - '2137:2137'
+      - '27017:27017'
+    volumes:
+      - ./.nginx/conf.d/:/etc/nginx/conf.d
+    networks:
+      - very_advanced_network
+      
+  main-service:
+    container_name: main-service
+    restart: unless-stopped
+    build:
+      context: services/main-service
+      dockerfile: Dockerfile 
+    image: 'main-service:latest'
+    environment:
+      EUREKA_SERVICE_URL: ${EUREKA_SERVICE_URL}
+    depends_on:
+      - mongo
+      - naming-server
+    networks:
+      - very_advanced_network
+  
+  naming-server:
+    container_name: naming-server
+    build:
+      context: services/naming-server
+      dockerfile: Dockerfile 
+    image: 'naming-server:latest'
+    networks:
+      - very_advanced_network
+  
+  gateway:
+    container_name: gateway
+    restart: unless-stopped
+    build:
+      context: services/gateway
+      dockerfile: Dockerfile 
+    image: 'gateway:latest'
+    environment:
+      EUREKA_SERVICE_URL: ${EUREKA_SERVICE_URL}
+    depends_on:
+      - mongo
+      - naming-server
+    networks:
+      - very_advanced_network
+
+  user-service:
+    container_name: user-service
+    restart: unless-stopped
+    build:
+      context: services/user-service
+      dockerfile: Dockerfile 
+    image: 'user-service:latest'
+    environment:
+      EUREKA_SERVICE_URL: ${EUREKA_SERVICE_URL}
+    depends_on:
+      - mongo
+      - user-service
+    networks:
+      - very_advanced_network
+
+  mongo:
+    image: mongo:5.0
+    container_name: mongo
+    restart: unless-stopped
+    ports:
+      - '27017:27017'
+    networks:
+      - very_advanced_network
+
+volumes:
+  messanger_volume:
+
+networks:
+  very_advanced_network: null
